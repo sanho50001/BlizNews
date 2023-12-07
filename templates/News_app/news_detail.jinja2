@@ -1,0 +1,93 @@
+
+{% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BlizNews</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {#        <link rel="manifest" href="site.webmanifest">#}
+        <link rel="shortcut icon" type="image/x-icon" href="{{ static('News_app/img/logo/bliznews.jpg') }}">
+    </head>
+{% endblock %}
+
+{% block body %}
+    {% for item in news %}
+    <body style="
+            background-image: url({{ item.news_image_url }});
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            color: #e1fcff">
+
+
+
+
+        <div>
+            <h1 style="background: black;
+                            margin: 40px 20px 20px 20px;
+                            padding: 10px 30px 10px 20px;">
+                {{ item.title }}
+            </h1>
+
+            <div>
+{#            {% for text in item.text %}#}
+{#                {% if text == '<br>' %}#}
+{#                    <br> {{ text }}#}
+{#                    {% if text == '<div class="quote-box" data-type="blizzard"> <div class="quote-header"> </div> <div class="quote-body">' %}#}
+{#                        <div class="quote-box" data-type="blizzard">#}
+{#                            <div class="quote-header">#}
+{#                                <div class="quote-body">{{ text }}#}
+{#                                {% if text == '<img src=' %}#}
+{#                                    <img src="{{ text }}" alt="">#}
+{#                                #}
+{#                                {% endif %} #}
+{#                                    {% if text == '<i>'%}#}
+{#                                        <i> {{ text }} #}
+{#                                        {% if text == '<ul>' %}#}
+{#                                            <ul>#}
+{#                                            {{ text }}#}
+{#                                                {% if  %}#}
+{##}
+{#                                                {% endif %}#}
+{#                                            </ul>#}
+{#                                        {% endif %} #}
+{#                                        </i>#}
+{#                                    {% endif %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        {% endif %}#}
+{#                    {% else %}#}
+{#                    {{ text }}#}
+{#                {% endif %}#}
+{#                {{ text }}#}
+{#            {% endfor %}#}
+{#                {% for text in item.text %}#}
+{#                    {{ text }}#}
+{#                {% endfor %}#}
+                <div>
+                    <h1>
+                        <a href="{{ item.original_news }}" style="color: red;
+                        background: black;
+                            margin: 40px 20px 20px 20px;
+                            padding: 10px 30px 10px 20px;">Original news</a>
+                    </h1>
+                </div>
+                <div style="background: black;
+                            margin: 40px 20px 20px 20px;
+                            padding: 10px 30px 10px 20px;">
+                    {{ item.text }}
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+    </body>
+{% endblock %}

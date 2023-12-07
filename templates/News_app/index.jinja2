@@ -1,0 +1,236 @@
+
+
+{% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>BlizNews</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {#        <link rel="manifest" href="site.webmanifest">#}
+        <link rel="shortcut icon" type="image/x-icon" href="{{ static('News_app/img/logo/bliznews.jpg') }}">
+
+        <!-- CSS here -->
+        <link rel="stylesheet" href="{{ static('News_app/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/ticker-style.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/flaticon.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/slicknav.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/fontawesome-all.min.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/themify-icons.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/slick.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/nice-select.css') }}">
+        <link rel="stylesheet" href="{{ static('News_app/css/style.css') }}">
+    </head>
+{% endblock %}
+
+{% block body %}
+    <body style="
+            background-image: url({{ static('News_app/img/img.png' ) }});
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;">
+
+    <main style="">
+        <!-- Trending Area Start -->
+
+{#        <div class="trending-area fix" style="color: beige;">#}
+{#            <div class="container">#}
+{#                <div class="trending-main">#}
+{##}
+{#                    <!-- Trending Tittle -->#}
+{##}
+{#                    <div class="row">#}
+{#                        <div class="col-lg-8">#}
+{##}
+{#                            <!-- Trending Bottom -->#}
+{##}
+{#                            <div class="trending-bottom">#}
+{#                                <div class="row">#}
+{#                                    {% for item in board %}#}
+                                        {#                                    {{ item }}#}
+{#                                        <div class="col-lg-4">#}
+{#                                            <div class="single-bottom mb-35">#}
+{##}
+{#                                                {% if forloop.counter <= 5 %}#}
+{#                                                    {% if item.game.counter <= 1 %}#}
+{#                                                        <div class="trend-bottom-img mb-30">#}
+{#                                                            <img src="{{ item.board_image_url }}" alt="" width="400px"#}
+{#                                                                 height="400px">#}
+{#                                                        </div>#}
+{#                                                        <div class="trend-bottom-cap">#}
+{#                                                            <span class="color{{ forloop.counter }}">{{ item.game }}</span>#}
+{#                                                            <h4>#}
+                                                                {#                                                    <a href="{{ url('news_app:news_detail', pk=item.news_id) }}">#}
+                                                                {#                                                    {{ item.text_first }}</a>#}
+{#                                                            </h4>#}
+{#                                                            <h5>{{ item.text_second }}</h5>#}
+{#                                                        </div>#}
+{#                                                    {% endif %}#}
+{#                                                {% endif %}#}
+{#                                            </div>#}
+{##}
+{#                                        </div>#}
+{##}
+{##}
+{#                                    {% endfor %}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <!--   Weekly2-News start -->
+        <div class="weekly2-news-area  weekly2-pading gray-bg">
+            <div class="container">
+                <div class="weekly2-wrapper">
+                    <!-- section Tittle -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-tittle mb-30">
+                                <h3>Weekly Top News</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="weekly2-news-active dot-style dot-style row"
+                             style="
+                             display: grid;
+                             grid-template-columns: repeat(3, 1fr);
+">
+
+                        {% for item in board %}
+                                <div class="weekly2-single col-6">
+
+                                    <div class="weekly2-img">
+                                        <img src="{{ item.board_image_url }}">
+                                    </div>
+                                    <div class="weekly2-caption">
+                                        <span class="color1">{{ item.game }}</span>
+                                        <h4><a href="{{ url ("News_app:news_detail", news_id=item.id) }}">{{ item.text_first }}</a></h4>
+                                    </div>
+                                </div>
+                        {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Weekly-News -->
+
+        <!--Start pagination -->
+        <div class="pagination-area pb-45 text-center">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-xl-12">
+
+                        <div class="single-wrap d-flex justify-content-center">
+
+                            <nav aria-label="Page navigation example">
+
+                                <ul class="pagination justify-content-start">
+                                    {% if is_paginated %}
+
+                                    {% if page_obj.has_previous() %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number() }}">
+                                                <span class="flaticon-arrow roted"></span>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    {% for pagin in paginator.page_range %}
+                                        {% if page_obj.number == pagin %}
+                                            <li class="page-item active">
+                                                <a class="page-link" href="?page={{ pagin }}">{{ pagin }}</a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ pagin }}">{{ pagin }}</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% if page_obj.has_next() %}
+                                        <li class="page-item">
+                                        <a class="page-link" href="?page={{ page_obj.next_page_number() }}">
+                                            <span class="flaticon-arrow right-arrow">
+
+                                            </span>
+                                        </a>
+                                    {% endif %}
+
+                                    </li>
+
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- End pagination  -->
+    </main>
+
+
+    <!-- JS here -->
+
+    {#    <!-- All JS Custom Plugins Link Here here -->#}
+    {#    <script src="{% static 'News_app/js/vendor/modernizr-3.5.0.min.js' %}"></script>#}
+    {#    <!-- Jquery, Popper, Bootstrap -->#}
+    {#    <script src="{% static 'News_app/js/vendor/jquery-1.12.4.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/popper.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/bootstrap.min.js' %}"></script>#}
+    {#    <!-- Jquery Mobile Menu -->#}
+    {#    <script src="{% static 'News_app/js/jquery.slicknav.min.js' %}"></script>#}
+    {##}
+    {#    <!-- Jquery Slick , Owl-Carousel Plugins -->#}
+    {#    <script src="{% static 'News_app/js/owl.carousel.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/slick.min.js' %}"></script>#}
+    {#    <!-- Date Picker -->#}
+    {#    <script src="{% static 'News_app/js/gijgo.min.js' %}"></script>#}
+    {#    <!-- One Page, Animated-HeadLin -->#}
+    {#    <script src="{% static 'News_app/js/wow.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/animated.headline.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.magnific-popup.js' %}"></script>#}
+    {##}
+    {#    <!-- Breaking New Pluging -->#}
+    {#    <script src="{% static 'News_app/js/jquery.ticker.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/site.js' %}"></script>#}
+    {##}
+    {#    <!-- Scrollup, nice-select, sticky -->#}
+    {#    <script src="{% static 'News_app/js/jquery.scrollUp.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.nice-select.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.sticky.js' %}"></script>#}
+    {##}
+    {#    <!-- contact js -->#}
+    {#    <script src="{% static 'News_app/js/contact.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.form.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.validate.min.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/mail-script.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/jquery.ajaxchimp.min.js' %}"></script>#}
+    {##}
+    {#    <!-- Jquery Plugins, main Jquery -->#}
+    {#    <script src="{% static 'News_app/js/plugins.js' %}"></script>#}
+    {#    <script src="{% static 'News_app/js/main.js' %}"></script>#}
+
+    </body>
+{% endblock %}

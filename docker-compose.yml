@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  PostgresDB:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_USER=BlizNewsUser
+      - POSTGRES_DB=BlizNewsDB
+      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
+    volumes:
+#      - db-data:/app
+      - pg_project:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+  celery:
+    container_name: worker
+    restart: always
+    build:
+      context: .
+    volumes:
+#      - db-data:/app
+      - pg_project:/var/lib/postgresql/data
+    command: [ "celery", "-A", "BlizNews", "worker", "-l", "info", '-P', 'eventlet']
+    depends_on:
+      - redis
+      - app
+
+  app:
+    restart: always
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    volumes:
+#      - db-data:/app
+      - pg_project:/var/lib/postgresql/data
+    ports:
+      - "8000:8000"
+    command: bash -c "python manage.py makemigrations --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+#  sqlite3:
+#    container_name: sqlite3_container
+#    image: nouchka/sqlite3:latest
+#    stdin_open: true
+#    tty: true
+#    volumes:
+#      - db-data:/app
+#    ports:
+#      - '9000:9000'
+#    restart: unless-stopped
+#
+volumes:
+#  db-data:
+  pg_project:
