@@ -68,8 +68,8 @@ def news_detailed(request, news_id):
     Функция принимает news_id
     """
     board = Board.objects.get(id=news_id)
-    print('BOARD   ', board)
-    print(News.objects.filter(news_id=board.news_id))
+    # print('BOARD   ', board)
+    # print(News.objects.filter(news_id=board.news_id))
     # print(News.objects.filter(news_id=board.news_id))
     # news = News.objects.get(news_id=board.news_id)
     context = {
