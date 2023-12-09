@@ -14,7 +14,7 @@ services:
       - POSTGRES_PASSWORD=1
       - POSTGRES_USER=BlizNewsUser
       - POSTGRES_DB=BlizNewsDB
-      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
+#      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
     volumes:
 #      - db-data:/app
       - pg_project:/var/lib/postgresql/data
