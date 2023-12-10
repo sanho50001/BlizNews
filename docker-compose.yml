@@ -12,8 +12,10 @@ services:
     restart: always
     environment:
       - POSTGRES_PASSWORD=1
-      - POSTGRES_USER=BlizNewsUser
-      - POSTGRES_DB=BlizNewsDB
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
+      - POSTGRES_USER=bliznewsuser
+      - POSTGRES_DB=bliznewsdb
 #      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
     volumes:
 #      - db-data:/app
