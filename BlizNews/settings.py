@@ -108,13 +108,24 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'BlizNewsDB',
+#         'USER': 'BlizNewsUser',
+#         'PASSWORD': '1',
+#         'HOST': 'bliznews-PostgresDB-1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'BlizNewsDB',
         'USER': 'BlizNewsUser',
         'PASSWORD': '1',
-        'HOST': 'bliznews-PostgresDB-1',
+        'HOST': 'bliznews_PostgresDB_1',
         'PORT': '5432',
     }
 }
