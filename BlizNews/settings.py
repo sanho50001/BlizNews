@@ -125,7 +125,7 @@ DATABASES = {
         'NAME': 'BlizNewsDB',
         'USER': 'BlizNewsUser',
         'PASSWORD': '1',
-        'HOST': 'bliznews_PostgresDB_1',
+        'HOST': 'PostgresDB',
         'PORT': '5432',
     }
 }
