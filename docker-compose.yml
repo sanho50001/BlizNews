@@ -36,11 +36,11 @@ services:
     image: 'bitnami/postgresql:latest'
     restart: always
     environment:
+      - POSTGRES_USER=bliznewsuser
+      - POSTGRES_DB=bliznewsdb
       - POSTGRES_PASSWORD=1
-      - POSTGRES_USER=BlizNewsUser
-      - POSTGRES_DB=BlizNewsDB
-#      - POSTGRES_USER=bliznewsuser
-#      - POSTGRES_DB=bliznewsdb
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
 #      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
     volumes:
       - pg_project:/var/lib/postgresql/data
