@@ -18,9 +18,13 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 class MainView(ListView):
     """Функция отображения Скидок"""
     model = Board
+    # model = Games
+
     template_name = "News_app/index.jinja2"
     paginate_by = 6
     context_object_name = "board"
+    # context_object_name = "games"
+
 
     # def get_context_data(self, **kwargs):
     #
@@ -30,8 +34,7 @@ class MainView(ListView):
     #     return Board.objects.all()
     #
     # def get_queryset(self):
-    #
-    #     return Board.objects.order_by('news_id')
+    #     return Games.objects.prefetch_related('game_board')
 
 
 def parser_news(request):
