@@ -130,8 +130,8 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BlizNewsDB',
-        'USER': 'BlizNewsUser',
+        'NAME': 'bliznewsdb',
+        'USER': 'bliznewsuser',
         'PASSWORD': '1',
         'HOST': 'PostgresDB',
         'PORT': '5432',
