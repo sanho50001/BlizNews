@@ -38,6 +38,12 @@ class News(models.Model):
         auto_now_add=True, verbose_name=_("data created")
     )
     original_news = models.CharField(max_length=500, blank=True, verbose_name=_('original news'))
+    slug = models.SlugField(
+        max_length=100,
+        null=False,
+        blank=True,
+        verbose_name="URL news",
+    )
 
     class Meta:
         verbose_name = _('News')
@@ -45,6 +51,21 @@ class News(models.Model):
 
     def __str__(self):
         return str(self.id) + ' News ' + str(self.game)
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        super(News, self).save(
+            force_insert=False, force_update=False, using=None, update_fields=None
+        )
+
+        self.slug = self.title
+        return super(News, self).save(
+            force_insert, force_update, using, update_fields
+        )
+
+    def get_absolute_url(self):
+        return reverse("News_app:news_detail", args=[self.slug])
 
 
 def file_newsimages_directory_path(instance: 'NewsImages', filename: str) -> str:
@@ -103,6 +124,19 @@ class Board(models.Model):
 
     def __str__(self):
         return str(self.id) + ' Board ' + str(self.game)
+
+    # def save(
+    #     self, force_insert=False, force_update=False, using=None, update_fields=None
+    # ):
+    #     super(Board, self).save(
+    #         force_insert=False, force_update=False, using=None, update_fields=None
+    #     )
+    #
+    #     self.name_game = self.game
+    #     return super(Board, self).save(
+    #         force_insert, force_update, using, update_fields
+    #     )
+
     #
     # def save(self, *args, **kwargs):
     #     obj = Board.objects.filter(news_id=self.news_id)

@@ -29,7 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "0.0.0.0",
-    "127.0.0.1"
+    "127.0.0.1",
+    '31.129.103.150'
+    'bliznews.ru'
 ]
 
 
@@ -97,6 +99,8 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# local
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -108,6 +112,8 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 #     }
 # }
 
+# Docker-version Win
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -118,6 +124,8 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 #         'PORT': '5432',
 #     }
 # }
+
+# Docker-version VPS
 
 DATABASES = {
     'default': {

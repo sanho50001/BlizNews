@@ -108,19 +108,40 @@
                              display: grid;
                              grid-template-columns: repeat(3, 1fr);
 ">
+{#                              board        #}
+{#                        {% for item in board %}#}
+{#                                <div class="weekly2-single col-6">#}
+{##}
+{#                                    <div class="weekly2-img">#}
+{#                                        <img src="{{ item.board_image_url }}">#}
+{#                                    </div>#}
+{#                                    <div class="weekly2-caption">#}
+{#                                        <span class="color1">{{ item.game }}</span>#}
+{#                                        <h4><a href="{{ url ("News_app:news_detail", news_id=item.id) }}">{{ item.text_first }}</a></h4>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                        {% endfor %}#}
 
-                        {% for item in board %}
+
+{#                        games #}
+                            {% for item in games %}
+{#                                {% for items in item.game_board.values() %}#}
                                 <div class="weekly2-single col-6">
 
                                     <div class="weekly2-img">
                                         <img src="{{ item.board_image_url }}">
                                     </div>
                                     <div class="weekly2-caption">
-                                        <span class="color1">{{ item.game }}</span>
-                                        <h4><a href="{{ url ("News_app:news_detail", news_id=item.id) }}">{{ item.text_first }}</a></h4>
+                                        <span class="color1">{{ item.name_game }}</span>
+                                        <h4>
+                                            <a href="{{ url ("News_app:news_detail", news_id=item.id) }}">{{ item.text_first }}</a>
+                                        </h4>
                                     </div>
                                 </div>
-                        {% endfor %}
+{#                                {% endfor %}#}
+                            {% endfor %}
+
+
                         </div>
 
                     </div>

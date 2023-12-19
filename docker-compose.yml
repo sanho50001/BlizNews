@@ -6,20 +6,51 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '10'
+        max-size: '200k'
 
+# Для Windows-Docker
+#  PostgresDB:
+#    image: postgres
+#    restart: always
+#    environment:
+#      - POSTGRES_PASSWORD=1
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
+##      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
+#    volumes:
+#      - pg_project:/var/lib/postgresql/data
+#    ports:
+#      - ${POSTGRES_PORT:-5432}:5432
+#    logging:
+#      driver: 'json-file'
+#      options:
+#        max-file: '10'
+#        max-size: '200k'
+
+# Для VPS-Docker
   PostgresDB:
     image: 'bitnami/postgresql:latest'
-    #    image: postgres
     restart: always
     environment:
-      - POSTGRES_PASSWORD=iutFEgduohw
-      - POSTGRES_USER=postgres
-        #      - POSTGRES_DB=BlizNewsDB
+      - POSTGRES_USER=bliznewsuser
+      - POSTGRES_DB=bliznewsdb
+      - POSTGRES_PASSWORD=1
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
+#      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
     volumes:
-#      - db-data:/app
       - pg_project:/var/lib/postgresql/data
     ports:
       - ${POSTGRES_PORT:-5432}:5432
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '10'
+        max-size: '200k'
 
   celery:
     container_name: worker
@@ -27,12 +58,17 @@ services:
     build:
       context: .
     volumes:
-#      - db-data:/app
       - pg_project:/var/lib/postgresql/data
     command: [ "celery", "-A", "BlizNews", "worker", "-l", "info", '-P', 'eventlet']
     depends_on:
       - redis
       - app
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '10'
+        max-size: '200k'
+
 
   app:
     restart: always
@@ -40,23 +76,19 @@ services:
       dockerfile: ./Dockerfile
       context: .
     volumes:
-#      - db-data:/app
       - pg_project:/var/lib/postgresql/data
     ports:
       - "8000:8000"
-    command: bash -c "python manage.py makemigrations --noinput && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations --noinput &&
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000 &&
+      python manage.py createsuperuser admin admin"
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '10'
+        max-size: '200k'
 
-#  sqlite3:
-#    container_name: sqlite3_container
-#    image: nouchka/sqlite3:latest
-#    stdin_open: true
-#    tty: true
-#    volumes:
-#      - db-data:/app
-#    ports:
-#      - '9000:9000'
-#    restart: unless-stopped
-#
+
 volumes:
-#  db-data:
   pg_project:

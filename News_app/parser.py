@@ -54,7 +54,7 @@ def parser_main_page_info(product):
             news_id=news_id,
             text_first=title_text,
             text_second=description_text,
-            board_image_url=news_image_url
+            board_image_url=news_image_url,
         )
         board.save()
 
