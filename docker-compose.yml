@@ -8,15 +8,13 @@ services:
       - "6379:6379"
 
   PostgresDB:
-    image: postgres
+    image: 'bitnami/postgresql:latest'
+    #    image: postgres
     restart: always
     environment:
-      - POSTGRES_PASSWORD=1
-#      - POSTGRES_USER=BlizNewsUser
-#      - POSTGRES_DB=BlizNewsDB
-      - POSTGRES_USER=bliznewsuser
-      - POSTGRES_DB=bliznewsdb
-#      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
+      - POSTGRES_PASSWORD=iutFEgduohw
+      - POSTGRES_USER=postgres
+        #      - POSTGRES_DB=BlizNewsDB
     volumes:
 #      - db-data:/app
       - pg_project:/var/lib/postgresql/data
