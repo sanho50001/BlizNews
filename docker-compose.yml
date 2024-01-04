@@ -13,34 +13,13 @@ services:
         max-size: '200k'
 
 # Для Windows-Docker
-  PostgresDB:
-    image: postgres
-    restart: always
-    environment:
-      - POSTGRES_PASSWORD=1
-      - POSTGRES_USER=BlizNewsUser
-      - POSTGRES_DB=BlizNewsDB
-#      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
-    volumes:
-      - pg_project:/var/lib/postgresql/data
-    ports:
-      - ${POSTGRES_PORT:-5432}:5432
-    logging:
-      driver: 'json-file'
-      options:
-        max-file: '10'
-        max-size: '200k'
-
-# Для VPS-Docker
 #  PostgresDB:
-#    image: 'bitnami/postgresql:latest'
+#    image: postgres
 #    restart: always
 #    environment:
-#      - POSTGRES_USER=bliznewsuser
-#      - POSTGRES_DB=bliznewsdb
 #      - POSTGRES_PASSWORD=1
-##      - POSTGRES_USER=BlizNewsUser
-##      - POSTGRES_DB=BlizNewsDB
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
 ##      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
 #    volumes:
 #      - pg_project:/var/lib/postgresql/data
@@ -51,6 +30,27 @@ services:
 #      options:
 #        max-file: '10'
 #        max-size: '200k'
+
+# Для VPS-Docker
+  PostgresDB:
+    image: 'bitnami/postgresql:latest'
+    restart: always
+    environment:
+      - POSTGRES_USER=bliznewsuser
+      - POSTGRES_DB=bliznewsdb
+      - POSTGRES_PASSWORD=1
+#      - POSTGRES_USER=BlizNewsUser
+#      - POSTGRES_DB=BlizNewsDB
+#      - POSTGRES_HOST_AUTH_METHOD=POSTGRES_PASSWORD
+    volumes:
+      - pg_project:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '10'
+        max-size: '200k'
 
   celery:
     container_name: worker
