@@ -116,29 +116,29 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 
 # Docker-version Win
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BlizNewsDB',
-        'USER': 'BlizNewsUser',
-        'PASSWORD': '1',
-        'HOST': 'bliznews-PostgresDB-1',
-        'PORT': '5432',
-    }
-}
-
-# Docker-version VPS
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bliznewsdb',
-#         'USER': 'bliznewsuser',
+#         'NAME': 'BlizNewsDB',
+#         'USER': 'BlizNewsUser',
 #         'PASSWORD': '1',
-#         'HOST': 'PostgresDB',
+#         'HOST': 'bliznews-PostgresDB-1',
 #         'PORT': '5432',
 #     }
 # }
+
+# Docker-version VPS
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bliznewsdb',
+        'USER': 'bliznewsuser',
+        'PASSWORD': '1',
+        'HOST': 'PostgresDB',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
