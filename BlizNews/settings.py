@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -114,29 +116,29 @@ WSGI_APPLICATION = 'BlizNews.wsgi.application'
 
 # Docker-version Win
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'BlizNewsDB',
-#         'USER': 'BlizNewsUser',
-#         'PASSWORD': '1',
-#         'HOST': 'bliznews-PostgresDB-1',
-#         'PORT': '5432',
-#     }
-# }
-
-# Docker-version VPS
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bliznewsdb',
-        'USER': 'bliznewsuser',
+        'NAME': 'BlizNewsDB',
+        'USER': 'BlizNewsUser',
         'PASSWORD': '1',
-        'HOST': 'PostgresDB',
+        'HOST': 'bliznews-PostgresDB-1',
         'PORT': '5432',
     }
 }
+
+# Docker-version VPS
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'bliznewsdb',
+#         'USER': 'bliznewsuser',
+#         'PASSWORD': '1',
+#         'HOST': 'PostgresDB',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -182,11 +184,22 @@ LANGUAGES = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'home/app/web/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+#
+MEDIA_URL = 'media/'
+# MEDIA_ROOT = BASE_DIR / 'uploads'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'uploads'
+STATIC_ROOT = '/home/app/web/static/'
+MEDIA_ROOT = '/home/app/web/media/'
+
+# STATIC_URL = "/static/"
+# # По какому пути можно будет найти файлы
+# STATIC_ROOT = BASE_DIR / "static"
+#
+# # Аналогично static файлам
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

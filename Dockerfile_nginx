@@ -1,0 +1,6 @@
+FROM nginx
+RUN apt install nginx
+RUN rm /etc/nginx/conf.d/*.conf
+RUN rm /etc/nginx/*.conf
+COPY nginx-conf.conf /etc/nginx/conf.d
+COPY nginx.conf /etc/nginx/
